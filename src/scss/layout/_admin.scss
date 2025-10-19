@@ -1,0 +1,48 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+@use 'sass:color';
+
+.resumen-barberos,
+.bloqueo-card,
+.contenido-resumen{
+    @include m.glass-effect(v.$glass-bg, v.$glass-border, v.$glass-shadow);
+    &{
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        @include m.tablet {
+            padding: 1rem 4rem;
+        }
+    }
+    p{
+        font-weight: v.$bold;
+        color: v.$dorado;
+        font-size: 1.6rem;
+        @include m.tablet {
+            font-size: 2rem;
+        }
+    }
+    span{
+        color: v.$blanco;
+    }
+    hr{
+        margin-bottom: 3rem;
+    }
+}
+
+// .servicios, .acciones{
+//     @extend .citas;
+//     .acciones{
+//         margin: 0;
+//         width: 100%;
+//     }
+//     .boton,
+//     .boton-eliminar{
+//         margin: 0;
+//         width: 100%;
+//         @include m.tablet {
+//             width: 50%;
+//         }
+//     }
+// }
+

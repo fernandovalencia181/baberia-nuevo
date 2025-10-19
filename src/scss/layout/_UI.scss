@@ -1,0 +1,154 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+@use 'sass:color';
+@use "sass:math";
+
+.contenedor-app{
+    @include m.tablet{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        min-height: 100vh;
+    }
+    .imagen{
+        height: 20rem;
+        background-image: url(../img/1.jpg);
+        background-size: cover;
+        background-position: center center;
+        @include m.tablet{
+            height: auto;
+        }
+    }
+    .app{
+        width: 95%;
+        margin: 0 auto;
+        padding: 3rem 0;
+        @include m.tablet{
+            overflow: scroll;
+        }
+    }
+}
+
+.enlace{
+    color: v.$dorado;
+    &:hover{
+        color: color.adjust(v.$dorado, $lightness: -20%);;
+    }
+}
+
+.barra{
+    margin: v.$separacion;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 7rem;
+    margin-bottom: 1rem;
+    p{
+        color: v.$gris-claro;
+    }
+    .boton{
+        @include m.boton(v.$rojo-semitransparente,v.$gris);
+        // padding: 1rem 0;
+        // width: 50%;
+        // margin: 0;
+
+        @include m.telefono {
+            width: 30%;
+        }
+    }
+
+    .logo-link img {
+        height: 50px; // ajustalo al tamaño de tu logo
+        width: auto;
+    }
+    .menu-icon{
+        cursor: pointer;
+    }
+}
+
+.barra-servicios{
+    margin: math.div(v.$separacion, 3) 0;
+    @include m.grid(2,1);
+    @include m.tablet{
+        display: flex;
+        justify-content: space-between;
+    }
+    .boton{
+        width: 100%;
+        margin: 0 0 1rem 0;
+        @include m.telefono {
+            padding: 1rem 2rem;
+            font-size: 1.6rem;
+        }
+    }
+}
+
+.boton {
+    &.sesion {
+        width: 100%;
+        padding: 1.4rem 2rem;
+        border: none;
+        border-radius: 0.8rem;
+        background: v.$dorado;
+        color: v.$negro;
+        font-size: 1.6rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+    }
+}
+
+.logo-login {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    img {
+        width: 120px;   // ajustá según el tamaño real de tu logo
+        height: auto;
+        border-radius: 8px; // opcional si querés esquinas suaves
+    }
+}
+
+.login-google {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    span{
+        color: v.$blanco;
+        font-size: 1.6rem
+    }
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #444;
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.google-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.google-btn:hover {
+    background: #f7f7f7;  /* un poco más claro */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    span{
+        color: v.$negro;
+        font-size: 1.6rem
+    }
+}
+
+

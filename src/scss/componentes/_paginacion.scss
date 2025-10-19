@@ -1,0 +1,31 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+@use 'sass:color';
+@use "sass:math";
+
+.paginacion{
+    margin-top: 5rem;
+    padding: math.div(v.$separacion,4) 0;
+    display: flex;
+    justify-content: space-between;
+    @include m.tablet{
+        margin-top: 6rem;        
+    }
+    .boton{
+        @include m.boton(v.$dorado, v.$negro);
+        &{
+            min-width: 12rem; // ✅ evita que queden demasiado chicos
+            font-weight: v.$bold;
+            letter-spacing: 0.05rem;
+            transition: all 0.2s ease-in-out;
+        }
+
+    }
+    button{
+        margin: 0 0 1rem 0;
+    }
+}
+
+.ocultar{
+    visibility: hidden;
+}
