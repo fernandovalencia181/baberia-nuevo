@@ -250,15 +250,19 @@ class LoginController {
         $client = new \Google_Client();
         $client->setClientId($_ENV['GOOGLE_CLIENT_ID']);
         $client->setClientSecret($_ENV['GOOGLE_CLIENT_SECRET']);
-        $client->setRedirectUri($_ENV['GOOGLE_REDIRECT_URI']); // misma que en googleLogin
+        $client->setRedirectUri($_ENV['GOOGLE_REDIRECT_URI']);
         $client->addScope("email");
         $client->addScope("profile");
 
-        // Ruta absoluta al archivo de certificados
-        $certPath = __DIR__ . '/../certs/cacert.pem';
-
-        // Crear cliente HTTP con Guzzle usando el certificado
-        $httpClient = new \GuzzleHttp\Client(['verify' => $certPath]);
+        // Configurar HTTP client según entorno
+        if (str_contains($_ENV['GOOGLE_REDIRECT_URI'], 'localhost')) {
+            // Desarrollo: desactivar verificación SSL
+            $httpClient = new \GuzzleHttp\Client(['verify' => false]);
+        } else {
+            // Producción: usar certificado cacert.pem
+            $certPath = __DIR__ . '/../certs/cacert.pem';
+            $httpClient = new \GuzzleHttp\Client(['verify' => $certPath]);
+        }
         $client->setHttpClient($httpClient);
 
         if (!isset($_GET['code'])) {
@@ -318,6 +322,7 @@ class LoginController {
 
         redirectSegunRol($usuario->rol);
     }
+
 
 
     public static function agregarPassword(Router $router) {
