@@ -261,6 +261,7 @@ class LoginController {
         }
 
         try {
+            putenv('CURL_CA_BUNDLE=' . __DIR__ . '/../certs/cacert.pem');
             $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
             $client->setAccessToken($token['access_token']);
 
