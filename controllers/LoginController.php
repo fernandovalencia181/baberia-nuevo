@@ -250,9 +250,16 @@ class LoginController {
         $client = new \Google_Client();
         $client->setClientId($_ENV['GOOGLE_CLIENT_ID']);
         $client->setClientSecret($_ENV['GOOGLE_CLIENT_SECRET']);
-        $client->setRedirectUri($_ENV['GOOGLE_REDIRECT_URI']); // usar la misma que en googleLogin
+        $client->setRedirectUri($_ENV['GOOGLE_REDIRECT_URI']); // misma que en googleLogin
         $client->addScope("email");
         $client->addScope("profile");
+
+        // Ruta absoluta al archivo de certificados
+        $certPath = __DIR__ . '/../certs/cacert.pem';
+
+        // Crear cliente HTTP con Guzzle usando el certificado
+        $httpClient = new \GuzzleHttp\Client(['verify' => $certPath]);
+        $client->setHttpClient($httpClient);
 
         if (!isset($_GET['code'])) {
             $authUrl = $client->createAuthUrl();
@@ -261,12 +268,17 @@ class LoginController {
         }
 
         try {
-            putenv('CURL_CA_BUNDLE=' . __DIR__ . '/../certs/cacert.pem');
+            // Obtener token usando el código de Google
             $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+            if (isset($token['error'])) {
+                throw new \Exception($token['error_description'] ?? $token['error']);
+            }
             $client->setAccessToken($token['access_token']);
 
+            // Obtener información del usuario
             $oauth = new \Google\Service\Oauth2($client);
             $googleUser = $oauth->userinfo->get();
+
         } catch (\Exception $e) {
             error_log("Error Google OAuth: " . $e->getMessage());
             exit("Ocurrió un error al iniciar sesión con Google.");
@@ -291,6 +303,7 @@ class LoginController {
             }
         }
 
+        // Iniciar sesión
         iniciarSesion();
         $_SESSION["id"] = $usuario->id;
         $_SESSION["nombre"] = $usuario->nombre . " " . $usuario->apellido;
@@ -305,6 +318,7 @@ class LoginController {
 
         redirectSegunRol($usuario->rol);
     }
+
 
     public static function agregarPassword(Router $router) {
         iniciarSesion();
