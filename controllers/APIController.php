@@ -191,14 +191,38 @@ class APIController {
             $mail->addAddress($emailCliente, $nombreCliente);
 
             $mail->isHTML(true);
-            $mail->Subject = "Confirmación de tu cita en Tu Barbería";
-            $mail->Body    = "
-                <h2>Tu cita ha sido reservada ✅</h2>
-                <p><strong>Barbero:</strong> {$nombreBarbero}</p>
-                <p><strong>Fecha:</strong> {$fecha}</p>
-                <p><strong>Hora:</strong> {$hora}</p>
-                <p>¡Te esperamos!</p>
+            $mail->CharSet = 'UTF-8'; // ✅ Soluciona los caracteres raros
+            $mail->Subject = "Confirmación de tu cita en Camacho Barber";
+
+            // ✅ Formatear la fecha a dd-MM-yyyy
+            $fechaFormateada = date('d-m-Y', strtotime($fecha));
+
+            // ✅ Cuerpo del correo con estilo
+            $mail->Body = "
+                <html>
+                <body style='font-family: Arial, sans-serif; background-color: #111; color: #f8f8f8; padding: 20px;'>
+                    <div style='max-width: 600px; margin: auto; background: rgba(0,0,0,0.6); border-radius: 10px; padding: 20px; border: 1px solid rgba(218,165,32,0.6); box-shadow: 0 0 10px rgba(218,165,32,0.3);'>
+                        <h2 style='color: #DAA520; text-align: center;'>Tu cita ha sido reservada ✅</h2>
+                        <p>Hola <strong>{$nombreCliente}</strong>,</p>
+                        <p>Has reservado una cita en <strong>Camacho Barber</strong>.</p>
+                        <hr style='border: none; border-top: 1px solid rgba(218,165,32,0.3); margin: 15px 0;'>
+                        <p><strong>💈 Barbero:</strong> {$nombreBarbero}</p>
+                        <p><strong>📅 Fecha:</strong> {$fechaFormateada}</p>
+                        <p><strong>⏰ Hora:</strong> {$hora}</p>
+                        <hr style='border: none; border-top: 1px solid rgba(218,165,32,0.3); margin: 15px 0;'>
+                        <p style='text-align:center;'>
+                            📍 <a href='https://maps.app.goo.gl/saEjj79YYD8DAbxM6?g_st=ipc' 
+                            style='color:#DAA520; text-decoration:none; font-weight:bold;'>
+                            Carrer de Domènec Cardenal, 48, 25230 Mollerussa, Lleida, España
+                            </a>
+                        </p>
+                        <p style='text-align:center; margin-top: 20px;'>¡Te esperamos con estilo 💇‍♂️!</p>
+                    </div>
+                </body>
+                </html>
             ";
+
+            $mail->AltBody = "Tu cita ha sido reservada.\n\nBarbero: {$nombreBarbero}\nFecha: {$fechaFormateada}\nHora: {$hora}\nDirección: Carrer de Domènec Cardenal, 48, 25230 Mollerussa, Lleida, España\n\n¡Te esperamos!";
 
             $mail->send();
             return ['ok' => true];
@@ -206,6 +230,7 @@ class APIController {
             return ['ok' => false, 'error' => $mail->ErrorInfo];
         }
     }
+
 
     private static function enviarWhatsApp($telefono, $nombre1, $nombre2, $fecha, $hora, $tipo = "cliente") {
         $token = "TU_TOKEN_DE_ACCESO";
