@@ -16,7 +16,6 @@ class Email {
         $this->token = $token;
     }
 
-    // Genera el host dinámicamente según el entorno
     private function getHost(): string {
         $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http";
         return $protocol . "://{$_SERVER['HTTP_HOST']}";
@@ -27,7 +26,7 @@ class Email {
 
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->SMTPDebug = 0;  // Mostrar debug detallado (cambiar a 0 en producción)
+        $mail->SMTPDebug = 0;
         $mail->Debugoutput = 'html';
 
         $mail->Host = $_ENV["SMTP_HOST"];
@@ -39,16 +38,23 @@ class Email {
 
         $mail->setFrom($_ENV["SMTP_FROM"], $_ENV["SMTP_FROM_NAME"]);
         $mail->addAddress($this->email, $this->nombre);
-        $mail->Subject = "Confirma tu cuenta";
+        $mail->Subject = "Confirma tu cuenta en Camacho Barber";
 
         $mail->isHTML(true);
         $mail->CharSet = "UTF-8";
 
-        $contenido = "<html>";
-        $contenido .= "<p><strong>Hola " . htmlspecialchars($this->nombre) . "</strong>, has creado tu cuenta en App Salon, solo debes confirmarla presionando el siguiente enlace:</p>";
-        $contenido .= "<p><a href='" . $host . "/confirmar-cuenta?token=" . urlencode($this->token) . "'>Confirmar Cuenta</a></p>";
-        $contenido .= "<p>Si no solicitaste esta cuenta, puedes ignorar este mensaje.</p>";
-        $contenido .= "</html>";
+        // Construimos el contenido de manera limpia
+        $contenido = <<<HTML
+<html>
+    <body>
+        <p><strong>Hola {$this->nombre}</strong>,</p>
+        <p>¡Gracias por crear tu cuenta en <strong>Camacho Barber</strong>! Solo debes confirmar tu correo presionando el siguiente enlace:</p>
+        <p><a href="{$host}/confirmar-cuenta?token={$this->token}">Confirmar Cuenta</a></p>
+        <p>Si no solicitaste esta cuenta, puedes ignorar este mensaje.</p>
+        <p>¡Nos vemos pronto en Camacho Barber!</p>
+    </body>
+</html>
+HTML;
 
         $mail->Body = $contenido;
 
@@ -65,7 +71,7 @@ class Email {
 
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->SMTPDebug = 0;  // Mostrar debug detallado (cambiar a 0 en producción)
+        $mail->SMTPDebug = 0;
         $mail->Debugoutput = 'html';
 
         $mail->Host = $_ENV["SMTP_HOST"];
@@ -77,16 +83,22 @@ class Email {
 
         $mail->setFrom($_ENV["SMTP_FROM"], $_ENV["SMTP_FROM_NAME"]);
         $mail->addAddress($this->email, $this->nombre);
-        $mail->Subject = "Reestablece tu password";
+        $mail->Subject = "Restablece tu contraseña en Camacho Barber";
 
         $mail->isHTML(true);
         $mail->CharSet = "UTF-8";
 
-        $contenido = "<html>";
-        $contenido .= "<p><strong>Hola " . htmlspecialchars($this->nombre) . "</strong>, has solicitado reestablecer tu password, sigue el siguiente enlace para hacerlo:</p>";
-        $contenido .= "<p><a href='" . $host . "/recuperar?token=" . urlencode($this->token) . "'>Reestablecer Password</a></p>";
-        $contenido .= "<p>Si no solicitaste este cambio, puedes ignorar este mensaje.</p>";
-        $contenido .= "</html>";
+        $contenido = <<<HTML
+<html>
+    <body>
+        <p><strong>Hola {$this->nombre}</strong>,</p>
+        <p>Has solicitado restablecer tu contraseña en <strong>Camacho Barber</strong>. Haz clic en el siguiente enlace para hacerlo:</p>
+        <p><a href="{$host}/recuperar?token={$this->token}">Restablecer contraseña</a></p>
+        <p>Si no solicitaste este cambio, puedes ignorar este mensaje.</p>
+        <p>¡Saludos de parte del equipo de Camacho Barber!</p>
+    </body>
+</html>
+HTML;
 
         $mail->Body = $contenido;
 
