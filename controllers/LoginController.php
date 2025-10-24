@@ -79,7 +79,7 @@ class LoginController {
                 /** @var \Model\Usuario|null $usuario */
                 $usuario = Usuario::findBy(["email" => $auth->email]);
 
-                if ($usuario && $usuario->confirmado === "1") {
+                if ($usuario && (int)$usuario->confirmado === 1)  {
                     // Rate limiting: evitar solicitudes frecuentes
                     if ($usuario->token && isset($usuario->token_creado) &&
                         strtotime($usuario->token_creado) > strtotime("-10 minutes")) {
