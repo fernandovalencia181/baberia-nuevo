@@ -3,7 +3,7 @@
 <div id="app">
     <input type="hidden" id="isAuth" value="<?php echo $isAuth ? 'true' : 'false'; ?>">
 
-    <div class="paginacion"></div>
+    <!-- <div class="paginacion"></div> -->
 
     <div id="paso-1" class="seccion">
         <div class="titulo-seccion" type="button" data-paso="1">

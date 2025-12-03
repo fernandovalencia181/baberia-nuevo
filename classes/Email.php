@@ -41,6 +41,9 @@ class Email {
 
     public function enviarConfirmacion(): bool {
         $host = $this->getHost();
+        // Definimos la URL del logo
+        $logo = "{$host}/build/img/logo-nuevo.webp";
+        
         $mail = $this->configurarMailer();
         $mail->addAddress($this->email, $this->nombre);
         $mail->Subject = "Confirma tu cuenta en Camacho Barber";
@@ -49,6 +52,12 @@ class Email {
 <html>
 <body style="font-family: Arial, sans-serif; background-color: #111; color: #f8f8f8; padding: 20px;">
     <div style="max-width:600px; margin:auto; background:rgba(0,0,0,0.6); border-radius:12px; padding:25px; border:1px solid rgba(218,165,32,0.4); box-shadow:0 0 10px rgba(218,165,32,0.3);">
+        
+        <!-- LOGO AGREGADO AQUÍ -->
+        <div style="text-align:center; margin-bottom: 20px;">
+            <img src="{$logo}" alt="Camacho Barber" style="width: 150px; height: auto;">
+        </div>
+
         <h2 style="color:#DAA520; text-align:center;">Bienvenido a Camacho Barber 💈</h2>
         <p style="font-size:1.1rem;">Hola <strong>{$this->nombre}</strong>,</p>
         <p>Gracias por registrarte en <strong>Camacho Barber</strong>. Para activar tu cuenta, haz clic en el siguiente botón:</p>
@@ -78,6 +87,9 @@ HTML;
 
     public function enviarInstrucciones(): bool {
         $host = $this->getHost();
+        // Definimos la URL del logo
+        $logo = "{$host}/build/img/logo-nuevo.webp";
+
         $mail = $this->configurarMailer();
         $mail->addAddress($this->email, $this->nombre);
         $mail->Subject = "Restablece tu contraseña en Camacho Barber";
@@ -86,6 +98,12 @@ HTML;
 <html>
 <body style="font-family: Arial, sans-serif; background-color: #111; color: #f8f8f8; padding: 20px;">
     <div style="max-width:600px; margin:auto; background:rgba(0,0,0,0.6); border-radius:12px; padding:25px; border:1px solid rgba(218,165,32,0.4); box-shadow:0 0 10px rgba(218,165,32,0.3);">
+        
+        <!-- LOGO AGREGADO AQUÍ -->
+        <div style="text-align:center; margin-bottom: 20px;">
+            <img src="{$logo}" alt="Camacho Barber" style="width: 150px; height: auto;">
+        </div>
+
         <h2 style="color:#DAA520; text-align:center;">Recupera tu acceso 🔑</h2>
         <p style="font-size:1.1rem;">Hola <strong>{$this->nombre}</strong>,</p>
         <p>Recibimos una solicitud para restablecer tu contraseña en <strong>Camacho Barber</strong>.</p>
