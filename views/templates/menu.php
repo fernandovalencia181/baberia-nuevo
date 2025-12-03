@@ -12,7 +12,7 @@
 <?php if(!$auth): ?>
 <div class="barra">
     <a href="/" class="logo-link">
-        <img src="/build/img/logo-nuevo.png" alt="Logo Barbería">
+        <img src="/build/img/logo-nuevo.webp" alt="Logo Barbería">
     </a>
 
     <div class="menu-guest">
@@ -26,7 +26,7 @@
 <?php if($auth === true && $rol !== 'admin'): ?>
 <div class="barra">
     <a href="/" class="logo-link">
-        <img src="/build/img/logo-nuevo.png" alt="Logo Barbería">
+        <img src="/build/img/logo-nuevo.webp" alt="Logo Barbería">
     </a>
 
     <div class="menu-icon" id="menu-icon-user">
@@ -50,7 +50,7 @@
 <?php if($auth === true && $rol === 'admin'): ?> 
 <div class="barra">
     <a href="/admin" class="logo-link">
-        <img src="/build/img/logo-nuevo.png" alt="Logo Barbería">
+        <img src="/build/img/logo-nuevo.webp" alt="Logo Barbería">
     </a>
 
     <div class="menu-icon" id="menu-icon-admin">

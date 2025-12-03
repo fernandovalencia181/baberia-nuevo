@@ -1,5 +1,5 @@
 <div class="logo-login">
-    <img src="/build/img/logo.webp" alt="Logo Barbería">
+    <img src="/build/img/logo-nuevo.webp" alt="Logo Barbería">
 </div>
 
 <!-- <h1 class="nombre-pagina">Login</h1> -->
