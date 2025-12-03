@@ -29,14 +29,35 @@
         display: flex;
         justify-content: center;
     }
+    &.login{
+        a {
+            color: v.$dorado;
+            display: block;
+            text-align: center;
+            font-weight: v.$bold;
+            padding: 0.8rem 1.5rem;
+            border-radius: 1rem;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+
+            &:hover {
+                color: v.$dorado;
+                transform: translateY(-2px);
+            }
+
+            &:active {
+                transform: scale(0.97);
+            }
+        }
+    }
 
     a {
         color: v.$blanco;
         display: block;
         text-align: center;
-        font-weight: v.$bold;
+        font-weight: v.$regular;
         padding: 0.8rem 1.5rem;
-        border-radius: 6px;
+        border-radius: 1rem;
         transition: all 0.2s ease-in-out;
         text-decoration: none;
 

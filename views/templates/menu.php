@@ -1,7 +1,32 @@
-<?php if(isset($_SESSION["login"]) && $_SESSION["login"] === true && $_SESSION["rol"] !== 'admin'): ?>
+<?php 
+    // Aseguramos que la sesión esté disponible para las comprobaciones
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+    
+    $auth = $_SESSION["login"] ?? false;
+    $rol = $_SESSION["rol"] ?? '';
+?>
+
+<!-- CASO 1: USUARIO INVITADO (NO LOGUEADO) -->
+<?php if(!$auth): ?>
 <div class="barra">
-    <a href="/cita" class="logo-link">
-        <img src="/build/img/logo.webp" alt="Logo Barbería">
+    <a href="/" class="logo-link">
+        <img src="/build/img/logo-nuevo.png" alt="Logo Barbería">
+    </a>
+
+    <div class="menu-guest">
+        <a href="/login" class="boton-nav">Iniciar Sesión</a>
+    </div>
+</div>
+<?php endif; ?>
+
+
+<!-- CASO 2: CLIENTE LOGUEADO (Y NO ADMIN) -->
+<?php if($auth === true && $rol !== 'admin'): ?>
+<div class="barra">
+    <a href="/" class="logo-link">
+        <img src="/build/img/logo-nuevo.png" alt="Logo Barbería">
     </a>
 
     <div class="menu-icon" id="menu-icon-user">
@@ -10,7 +35,8 @@
 
     <div class="menu glass-menu" id="menu-user">
         <ul>
-            <li><a href="/cita">Servicios</a></li>
+            <!-- He cambiado href="/cita" a "/" para que sea consistente con la nueva home -->
+            <li><a href="/">Servicios</a></li>
             <li><a href="/perfil">Editar Perfil</a></li>
             <li><a href="/citas">Mis Citas</a></li>
             <li><a href="/logout">Cerrar Sesión</a></li>
@@ -19,10 +45,12 @@
 </div>
 <?php endif; ?>
 
-<?php if(isset($_SESSION["rol"]) && $_SESSION["rol"] === 'admin'){ ?> 
+
+<!-- CASO 3: ADMINISTRADOR -->
+<?php if($auth === true && $rol === 'admin'): ?> 
 <div class="barra">
     <a href="/admin" class="logo-link">
-        <img src="/build/img/logo.webp" alt="Logo Barbería">
+        <img src="/build/img/logo-nuevo.png" alt="Logo Barbería">
     </a>
 
     <div class="menu-icon" id="menu-icon-admin">
@@ -41,4 +69,4 @@
         </ul>
     </div>
 </div>
-<?php } ?>
+<?php endif; ?>

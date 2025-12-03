@@ -275,19 +275,69 @@ function paginaAnterior(){
     });
 }
 
-function paginaSiguiente(){
+// function paginaSiguiente(){
+//     const btnSiguiente = document.querySelector("#siguiente");
+
+//     btnSiguiente.addEventListener("click", function(){
+//         // Validación para paso 1: servicios seleccionados
+//         if (paso === 1 && cita.servicios.length === 0) {
+//             mostrarAlerta("Selecciona al menos un servicio", "error", ".listado-servicios", true);
+//             return;
+//         }
+
+//         if (paso === 2) {
+//             const datosIncompletos = Object.values(cita).includes("") || cita.servicios.length === 0;
+//             // console.log(cita);
+//             if (datosIncompletos) {
+//                 mostrarAlerta("Completa todos los campos", "error", ".formulario", true);
+//                 return;
+//             }
+//         }
+
+//         if (paso >= TOTAL_PASOS) return;
+
+//         paso++;
+//         mostrarSeccion(paso);
+//         botonesPaginador(paso);
+//         actualizarTabActual(paso);
+//         window.scrollTo({ top: 0, behavior: 'smooth' }); // <-- Scroll arriba suave
+//     });
+// }
+
+function paginaSiguiente() {
     const btnSiguiente = document.querySelector("#siguiente");
 
-    btnSiguiente.addEventListener("click", function(){
+    btnSiguiente.addEventListener("click", function() {
         // Validación para paso 1: servicios seleccionados
         if (paso === 1 && cita.servicios.length === 0) {
             mostrarAlerta("Selecciona al menos un servicio", "error", ".listado-servicios", true);
             return;
         }
 
+        // --- LÓGICA DE REDIRECCIÓN AL LOGIN ---
+        if (paso === 1) {
+            const isAuth = document.querySelector("#isAuth").value === 'true';
+            
+            if (!isAuth) {
+                Swal.fire({
+                    title: "Inicia Sesión",
+                    text: "Para agendar una cita necesitas iniciar sesión o crear una cuenta.",
+                    icon: "info",
+                    showCancelButton: true,
+                    confirmButtonText: "Ir al Login",
+                    cancelButtonText: "Cancelar"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/login"; // Redirige a la nueva ruta de login
+                    }
+                });
+                return; // Detiene la ejecución, no avanza al paso 2
+            }
+        }
+        // --------------------------------------
+
         if (paso === 2) {
             const datosIncompletos = Object.values(cita).includes("") || cita.servicios.length === 0;
-            // console.log(cita);
             if (datosIncompletos) {
                 mostrarAlerta("Completa todos los campos", "error", ".formulario", true);
                 return;
@@ -300,7 +350,7 @@ function paginaSiguiente(){
         mostrarSeccion(paso);
         botonesPaginador(paso);
         actualizarTabActual(paso);
-        window.scrollTo({ top: 0, behavior: 'smooth' }); // <-- Scroll arriba suave
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
 

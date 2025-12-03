@@ -14,9 +14,12 @@ use Controllers\ServicioController;
 
 $router = new Router();
 
+// La raíz muestra la app de citas (donde están los servicios)
+$router->get("/", [CitaController::class, "index"]);
+
 // Iniciar Sesión
-$router->get("/",[LoginController::class, "login"]);
-$router->post("/",[LoginController::class, "login"]);
+$router->get("/login", [LoginController::class, "login"]);
+$router->post("/login", [LoginController::class, "login"]);
 $router->get("/logout",[LoginController::class, "logout"]);
 
 // Iniciar Sesión con Google
@@ -40,8 +43,10 @@ $router->post("/crear-cuenta",[LoginController::class, "crear"]);
 $router->get("/confirmar-cuenta",[LoginController::class, "confirmar"]);
 $router->get("/mensaje",[LoginController::class, "mensaje"]);
 
+// CITAS
+$router->get("/cita",[CitaController::class, "index"]);
+
 // AREA PRIVADA 
-$router->get("/cita",[CitaController::class,"index"]);
 $router->get("/admin",[AdminController::class,"index"]);
 $router->get("/api/admin/citas", [AdminController::class, "obtenerCitas"]);
 

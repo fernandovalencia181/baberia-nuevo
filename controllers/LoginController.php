@@ -13,6 +13,12 @@ class LoginController {
     public static function login(Router $router) {
         $alertas = [];
         $auth = new Usuario;
+
+        // Verificar si ya está logueado para redirigirlo
+        if(!isset($_SESSION)) session_start();
+        if(isset($_SESSION['login']) && $_SESSION['login']) {
+            redirectSegunRol($_SESSION['rol'] ?? 'cliente');
+        }
         
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             validarCSRF($_POST['csrf_token']);
@@ -257,7 +263,7 @@ class LoginController {
         // Configurar HTTP client según entorno
         if (str_contains($_ENV['GOOGLE_REDIRECT_URI'], 'localhost')) {
             // Desarrollo: desactivar verificación SSL
-            $httpClient = new \GuzzleHttp\Client(['verify' => false]);
+            $httpClient = new \GuzzleHttp\Client(['verify' => true]);
         } else {
             // Producción: usar certificado cacert.pem
             $certPath = __DIR__ . '/../certs/cacert.pem';

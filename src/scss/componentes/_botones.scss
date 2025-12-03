@@ -9,7 +9,7 @@
     }
 }
 .boton-eliminar{
-    @include m.boton(v.$rojo-semitransparente, v.$blanco);
+    @include m.boton(v.$rojo, v.$blanco);
     @include m.tablet {
         width: 50%;
     }

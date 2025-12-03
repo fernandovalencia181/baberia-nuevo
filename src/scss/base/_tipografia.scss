@@ -4,7 +4,8 @@ h1, h2, h3 {
     font-family: v.$fuente_principal;
     margin: calc(v.$separacion / 2) 0 calc(v.$separacion / 2) 0 ;
     font-weight: 900;
-    color: v.$blanco;
+    // color: v.$blanco;
+    color: v.$negro;
     text-align: center;
 }
 
@@ -19,7 +20,8 @@ h3 {
     text-align: center;
 }
 p {
-    color: v.$blanco;
+    // color: v.$blanco;
+    color: v.$negro;
     font-size: 2rem;
     font-weight: v.$regular;
 }

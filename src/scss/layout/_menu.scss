@@ -4,7 +4,7 @@
 
 .menu {
     position: absolute;
-    top: 10rem;
+    top: 11rem;
     right: 0;
     width: 20rem;
     padding: 1.5rem;
@@ -18,7 +18,7 @@
     transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
 
-    @include m.glass-effect(v.$glass-bg, v.$glass-border, v.$glass-shadow);
+    @include m.glass-effect(v.$glass-bg-dark, v.$glass-border, v.$glass-shadow);
 
     ul {
         list-style: none;
@@ -64,10 +64,9 @@
     }
 
     a.activo {
-        background: color.adjust(v.$dorado, $lightness: -15%);
-        color: v.$blanco;
+        background-color: rgba(255, 255, 255, 0.15);
+        // color: color.adjust(v.$dorado, $lightness: -5%);
         font-weight: v.$bold;
-        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.25);
     }
 }
 
@@ -77,5 +76,49 @@
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
+    }
+}
+
+// ----------------------------------------------------------------------
+// Estilos específicos para el área de invitado (Botón "Iniciar Sesión")
+// ----------------------------------------------------------------------
+.menu-guest {
+    display: flex;
+    align-items: center;
+
+    .boton-nav {
+        // --- EFECTO GLASS RESTAURADO ---
+        // Fondo blanco muy sutil (10% opacidad)
+        background-color: rgba(255, 255, 255, 0.1); 
+        // El desenfoque detrás del botón (clave del efecto glass)
+        backdrop-filter: blur(5px);
+        
+        // COLOR: Usamos negro sólido para el texto (imprescindible en fondo claro)
+        color: v.$dorado; 
+        
+        // BORDE: Negro semitransparente (0.3) para que parezca cristal ahumado fino
+        border: 1px solid v.$dorado; 
+        
+        // Diseño
+        padding: 0.8rem 2.5rem;
+        border-radius: 5rem; 
+        text-decoration: none;
+        font-size: 1.6rem;
+        font-weight: v.$bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        
+        transition: all 0.3s ease;
+
+        &:hover {
+            // AL PASAR EL MOUSE: Se vuelve sólido oscuro
+            background-color: v.$dorado;
+            color: v.$blanco; 
+            border-color: v.$dorado;
+            
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); // Sombra más pronunciada
+            cursor: pointer;
+        }
     }
 }

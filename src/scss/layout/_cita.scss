@@ -24,11 +24,11 @@
             }
         }
         span{
-            color: v.$blanco;
+            color: v.$negro;
         }
         .servicio{
             font-weight: v.$regular;
-            color: v.$blanco;
+            color: v.$negro;
         }
     }
 }
@@ -43,31 +43,10 @@
     }
 }
 
-// .titulo-seccion{
-//         margin: 0 auto;
-//         display: flex;
-//         align-items: center;
-//         justify-content: center;
-//         width: 100%;
-//         padding: 0;
-//         border: none;
-//         font-weight: v.$bold;
-//         position: fixed;
-//         top: 0;
-//         left: 0;
-//         height: 6rem;
-//         @include m.glass-effect(v.$glass-bg, v.$glass-border, v.$glass-shadow);
-//         z-index: 120;
-//         img {
-//             margin-right: 1rem;
-//             width: 2rem;
-//             height: 2rem;
-//         }
-//         p{
-//             color: v.$gris-claro;
-//             margin-top: 2.3rem;
-//         }
-//     }
+.encabezado{
+    color: color.adjust(v.$dorado, $lightness: -5%);
+    // text-shadow: 0 2px 2px rgb(218, 165, 32);
+}
 
 .titulo-seccion {
   // Centrado total del contenedor
@@ -85,7 +64,6 @@
   color: v.$dorado;
 
   // Efecto de fondo tipo "glass"
-  @include m.glass-effect(v.$glass-bg, v.$glass-border, v.$glass-shadow);
 
   // Posicionamiento (opcional: si querés que quede fijo arriba)
   position: fixed;
@@ -105,6 +83,10 @@
     margin: 0; // ✅ eliminamos el margin-top
     line-height: 1; // opcional: mejora alineación
   }
+    @include m.glass-effect(v.$glass-bg-dark, v.$glass-border, v.$glass-shadow);
+    &{
+        box-shadow: 0 8px 32px rgba(0, 0, 0, .2);
+    }
 }
 
 
@@ -148,3 +130,4 @@
         margin: 3rem auto;
     }
 }
+

@@ -1,13 +1,17 @@
 <?php include_once __DIR__ . "/../templates/menu.php" ?>
 
 <div id="app">
+    <input type="hidden" id="isAuth" value="<?php echo $isAuth ? 'true' : 'false'; ?>">
+
+    <div class="paginacion"></div>
+
     <div id="paso-1" class="seccion">
         <div class="titulo-seccion" type="button" data-paso="1">
             <img src="/build/img/razor-electric.svg"/>
             <p>Servicios</p>
         </div>
 
-        <h3 >Elige tus servicios a continuación</h3>
+        <h3 class="encabezado">Elige tus servicios a continuación</h3>
         <div id="servicios" class="listado-servicios"></div>
     </div>
     <div id="paso-2" class="seccion">
@@ -16,7 +20,7 @@
             <p>Información de Cita</p>
         </div>
 
-        <h3>Elija un Barbero, Día y Hora</h3>
+        <h3 class="encabezado">Elija un Barbero, Día y Hora</h3>
         <form class="formulario">
 
             <div class="campo" id="seleccionar-barbero">
@@ -54,7 +58,7 @@
             <p>Resumen</p>
         </div>
 
-        <h3>Verifica que la información sea correcta</h3>
+        <h3 class="encabezado">Verifica que la información sea correcta</h3>
 
         <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo generarTokenCSRF(); ?>">
         <div class="contenido-resumen"></div>

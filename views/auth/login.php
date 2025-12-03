@@ -3,12 +3,12 @@
 </div>
 
 <!-- <h1 class="nombre-pagina">Login</h1> -->
-<p class="descripcion-pagina">Inicia sesión con tus datos</p>
+<h3 class="encabezado">Inicia sesión con tus datos</h3>
 
 <?php include_once __DIR__ . "/../templates/alertas.php" ?>
 
 
-<form class="formulario" method="POST" action="/">
+<form class="formulario" method="POST" action="/login">
 
     <div class="campo">
         <label for="email">Email</label>
@@ -23,14 +23,14 @@
     <input type="submit" class="boton sesion" value="Iniciar Sesión">
 </form>
 
-<div class="acciones">
+<div class="acciones login">
     <a href="/crear-cuenta">¿Aún no tienes una cuenta? Crear una</a>
     <a href="/olvide">¿Olvidaste tu password?</a>
 </div>
 
-<div class="login-google">
+<!-- <div class="login-google">
     <a href="/google-login" class="google-btn">
         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
         <span>Iniciar sesión con Google</span>
     </a>
-</div>
+</div> -->

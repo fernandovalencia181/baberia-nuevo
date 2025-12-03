@@ -10,3 +10,7 @@
 2025-09-29 06:39:09 - : {"Cliente":null,"Barbero":null}
 2025-09-29 13:49:14 - : {"Cliente":null,"Barbero":null}
 2025-10-16 10:42:23 - : {"Cliente":null,"Barbero":null}
+2025-10-23 21:30:12 - : {"Cliente":null,"Barbero":null}
+2025-10-23 21:30:33 - : {"Cliente":null,"Barbero":null}
+2025-10-23 21:31:25 - : {"Cliente":null,"Barbero":null}
+2025-12-01 14:54:06 - : {"Cliente":null,"Barbero":null}

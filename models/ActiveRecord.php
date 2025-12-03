@@ -218,6 +218,7 @@ class ActiveRecord {
         foreach ($rows as $registro) {
             $array[] = static::crearObjeto($registro);
         }
+
         return $limit === 1 ? array_shift($array) : $array;
     }
 

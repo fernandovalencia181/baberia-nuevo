@@ -15,7 +15,7 @@
         </div>
         <div class="campo">
             <label for="email">Email</label>
-            <input type="email" value="<?php echo $usuario->email; ?>" name="email" placeholder="Tu Email">
+            <input type="email" value="<?php echo $usuario->email; ?>" name="email" placeholder="Tu Email" readonly>
         </div>
 
         <div class="campo">
